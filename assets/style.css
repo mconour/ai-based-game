@@ -1,0 +1,18 @@
+.wrapper {
+    margin: 0 auto;
+    width: 500px;    
+}
+
+.grid:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.grid > .col:first-child {
+    margin-left: 0;
+}
+
+.grid > .col:last-child {
+	margin-right: 0;
+}
