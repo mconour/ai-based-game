@@ -26,3 +26,20 @@
  border-radius: 30px;
  background: #e0e0e0;
 }
+
+.col:hover {
+	background: #EEE;
+}
+
+.fa {
+	line-height: 152px;
+}
+
+.fa-times {
+	color: #80D8FF;
+	font-size: 150px;
+}
+.fa-circle-o {
+	color: #FF80AB;
+	font-size: 125px;
+}
