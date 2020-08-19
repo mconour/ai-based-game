@@ -74,3 +74,21 @@
 	left: 0;
 	right: 0;
 }
+
+.button {
+    width: 115px;
+    top: 45%;
+    padding: 0.75em;
+    font-size: 1em;
+    border: 1px solid #fff;
+    background: transparent;
+    cursor: default;
+}
+
+.button:hover {
+	background: white;
+	color: black;
+}
+.button:focus {
+	outline: none;
+}
