@@ -43,3 +43,18 @@
 	color: #FF80AB;
 	font-size: 125px;
 }
+
+.overlay {
+    margin: 0 auto;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 500px;
+    height: 100%;
+    outline: none;
+    z-index: 1;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+}
