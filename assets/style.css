@@ -16,3 +16,13 @@
 .grid > .col:last-child {
 	margin-right: 0;
 }
+
+.col {
+ text-align: center;
+ float: left;
+ width: 30.65%;
+ height: 152px;
+ margin: 5px;
+ border-radius: 30px;
+ background: #e0e0e0;
+}
