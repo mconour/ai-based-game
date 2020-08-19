@@ -65,6 +65,12 @@
     margin: 0 auto;
     position: relative;
     font-family: Futura,Trebuchet MS,Arial,sans-serif; 
-    font-weight: 400;
+    font-weight: 700;
     color: #fff;
+}
+
+.winner {
+	top: 40%;
+	left: 0;
+	right: 0;
 }
