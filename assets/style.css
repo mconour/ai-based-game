@@ -92,3 +92,27 @@
 .button:focus {
 	outline: none;
 }
+
+.option {
+	top: 40%;
+	margin-bottom: 1.75em;
+}
+
+@media only screen and (min-width: 40.063em) {
+	.wrapper {
+		width: 600px;
+	}
+	.col {
+		width: 31.1%;
+		height: 186px;
+	}
+	.fa {
+		line-height: 186px;
+	}
+	.fa-times {
+		font-size: 180px;
+	}
+	.fa-circle-o {
+		font-size: 155px;
+	}
+}
