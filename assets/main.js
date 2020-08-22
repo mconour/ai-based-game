@@ -58,9 +58,15 @@ checkWin = () => {
             winner.innerHTML = text;
             overlay.style.display = "";
             xWin = x;
-			oWin = o;
+            oWin = o;
         }
     }
     checkTie();
 }
 
+checkTie = () => {
+    if(count > 8 && !xWin && !oWin) {
+        winner.innerHTML = "Tie";
+        overlay.style.display = "";
+    }
+}
