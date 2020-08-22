@@ -50,3 +50,17 @@ reset = () => {
         col[i].innerHTML = "";
     }
 }
+
+checkWin = () => {
+    let match = square.join();
+    for (let i = 0; i < 8; i++) {
+        if (winConditions[i].test(match)) {
+            winner.innerHTML = text;
+            overlay.style.display = "";
+            xWin = x;
+			oWin = o;
+        }
+    }
+    checkTie();
+}
+
