@@ -70,3 +70,19 @@ checkTie = () => {
         overlay.style.display = "";
     }
 }
+
+playGame = () => {
+    if (player === 1 && isEmpty(this) && count % 2 === 0) {
+        this.innerHTML = `<i class="fa fa-times"></i>`;
+        squareX.push(this.id);
+        count++;
+        checkWin(squareX, 'Player wins', true, false);
+        if (!xWin) computerO();
+    } else if (player === 2 && isEmpty(this) && count % 2 === 0) {
+        this.innerHTML = `<i class="fa fa-circle-o"></i>`;
+        squareO.push(this.id);
+        count++;
+        checkWin(squareO, 'Player wins', false, true);
+        if (!oWin) computerX();
+    } 
+}
