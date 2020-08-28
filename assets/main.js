@@ -73,16 +73,64 @@ checkTie = () => {
 
 playGame = () => {
     if (player === 1 && isEmpty(this) && count % 2 === 0) {
-		this.innerHTML = '<i class="fa fa-times"></i>';
-		squareX.push(this.id);
-		count++;
-		checkWin(squareX, 'Player wins', true, false);
-		if (!xWin) computerO();
-	} else if (player === 2 && isEmpty(this) && count % 2 === 0) {
-		this.innerHTML = '<i class="fa fa-circle-o"></i>';
-		squareO.push(this.id);
-		count++;
-		checkWin(squareO, 'Player wins', false, true);
-		if (!oWin) computerX();
+        this.innerHTML = '<i class="fa fa-times"></i>';
+        squareX.push(this.id);
+        count++;
+        checkWin(squareX, 'Player wins', true, false);
+        if (!xWin) computerO();
+    } else if (player === 2 && isEmpty(this) && count % 2 === 0) {
+        this.innerHTML = '<i class="fa fa-circle-o"></i>';
+        squareO.push(this.id);
+        count++;
+        checkWin(squareO, 'Player wins', false, true);
+        if (!oWin) computerX();
+    }
+}
+
+doRandom = () => {
+    if (count % 2 !== 0 && possibleMoves.length > 0) {
+        aiMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+        var move = document.getElementById(aiMove);
+        move.innerHTML = computerLetter;
+        square.push(aiMove);
+        count++;
+    }
+}
+
+computerO = () => {
+	possibleMoves = [];
+	
+	Array.prototype.forEach.call(col, function(el, i){
+		if (isEmpty(el)) {
+			possibleMoves.push(el.id);
+		}
+	});
+
+	if (possibleMoves.indexOf('5') > -1) {
+		possibleMoves = ['5'];
+		doRandom(squareO);
+	} else if (possibleMoves.indexOf('5') === -1 && squareX.length === 1) {
+		possibleMoves = ['1', '3', '7', '9'];
+		doRandom(squareO);
+	} else if ((/(?=.*1)(?=.*9)/.test(squareX) || /(?=.*3)(?=.*7)/.test(squareX)) && squareX.length === 2) {
+		possibleMoves = ['2', '4', '6', '8'];
+		doRandom(squareO);
+	} else if (/(1)|(3)|(7)|(9)/.test(squareX) && squareX.indexOf('5') === 0 && squareX.length === 2) {
+		possibleMoves = ['1', '3', '7', '9'];
+
+		var index = possibleMoves.indexOf(squareX[1]);
+		possibleMoves.splice(index, 1);
+
+		var aiTaken = possibleMoves.indexOf(squareO[0]);
+		possibleMoves.splice(aiTaken, 1);
+
+		pushSquare(squareO, squareX);
+		doRandom(squareO);
+	} else {
+		pushSquare(squareO, squareO);
+		pushSquare(squareO, squareX);
+		doRandom(squareO);
 	}
+
+	checkWin(squareO, 'Computer wins', false, true);
 }
