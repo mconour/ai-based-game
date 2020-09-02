@@ -134,3 +134,43 @@ computerO = () => {
 
 	checkWin(squareO, 'Computer wins', false, true);
 }
+
+computerX = () => {
+
+	var oppositeCorner = (10 - squareX[0]).toString();
+	var firstAiMove = possibleMoves.indexOf(squareX[0]);
+	var indexOfOpposite = possibleMoves.indexOf(oppositeCorner);
+	possibleMoves = [];
+	
+	Array.prototype.forEach.call(col, function(el, i){
+		if (isEmpty(el)) {
+			possibleMoves.push(el.id);
+		}
+	});
+
+	if (squareO.length === 0) {
+		possibleMoves = ['1', '3', '7', '9'];
+		doRandom(squareX);
+	} else if (squareO.indexOf('5') === 0 && squareO.length === 1) {
+		possibleMoves = ['1', '3', '7', '9'];
+		possibleMoves = oppositeCorner;
+
+		doRandom(squareX);
+	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 1) {
+		possibleMoves = ['1', '3', '7', '9'];
+		possibleMoves. splice(firstAiMove, 1);
+		possibleMoves.splice(indexOfOpposite, 1);
+
+		doRandom(squareX);
+	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 2 && possibleMoves.indexOf('5') > -1) {
+		possibleMoves = ['5'];
+		doRandom(squareX);
+	} 
+	else {
+		pushSquare(squareX, squareX);
+		pushSquare(squareX, squareO);
+		doRandom(squareX);
+	}
+
+	checkWin(squareX, 'Computer wins', true, false);
+}
