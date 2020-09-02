@@ -288,3 +288,12 @@ doAiMove = (square) => {
 		}
 	}
 }
+
+pushSquare = (push, check) => {
+    doAiMove(check);
+	var move = document.getElementById(aiMove);
+	if (move !== null) {
+		move.innerHTML = computerLetter;
+		push.push(aiMove);
+	}
+}
