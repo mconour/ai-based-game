@@ -297,3 +297,9 @@ pushSquare = (push, check) => {
 		push.push(aiMove);
 	}
 }
+
+play = () => {
+	for (let i = 0; i < 9; i++) {
+		col[i].addEventListener('click', playGame);
+	}
+}
