@@ -303,3 +303,8 @@ play = () => {
 		col[i].addEventListener('click', playGame);
 	}
 }
+
+playAgain = () => {
+	overlay.style.display = 'none';
+	option.style.display = '';
+}
