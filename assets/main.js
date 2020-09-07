@@ -308,3 +308,18 @@ playAgain = () => {
 	overlay.style.display = 'none';
 	option.style.display = '';
 }
+
+playAsX = () => {
+	count = 0;
+	player = 1;
+	computerLetter = '<i class="fa fa-circle-o"></i>';
+	reset();
+}
+
+playAsO = () => {
+	count = 1;
+	player = 2;
+	computerLetter = '<i class="fa fa-times"></i>';
+	reset();
+	computerX();
+}
