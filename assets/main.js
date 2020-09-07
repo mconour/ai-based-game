@@ -1,5 +1,5 @@
 const col = document.querySelectorAll('.col'),
-	overlay = document.getElementById('overlay'),
+	intro = document.getElementById('intro'),
 	winner = document.getElementById('winner'),
 	button = document.getElementById('button'),
 	option = document.getElementById('option'),
@@ -31,7 +31,7 @@ const winConditions = [
 	/(?=.*3)(?=.*5)(?=.*7)/
 ];
 
-overlay.style.display = 'none';
+intro.style.display = 'none';
 
 isEmpty = (el) => {
 	return !el.hasChildNodes();
@@ -51,12 +51,12 @@ reset = () => {
 	}
 }
 
-function checkWin(square, text, x, o) {
+checkWin = (square, text, x, o) => {
 	const match = square.join();
 	for (let i = 0; i < 8; i++) {
 		if (winConditions[i].test(match)) {
 			winner.innerHTML = text;
-			overlay.style.display = '';
+			intro.style.display = '';
 			xWin = x;
 			oWin = o;
 		}
@@ -64,10 +64,10 @@ function checkWin(square, text, x, o) {
 	checkTie();
 }
 
-function checkTie() {
+checkTie = () => {
 	if (count > 8 && !xWin && !oWin) {
 		winner.innerHTML = 'Tie';
-		overlay.style.display = '';
+		intro.style.display = '';
 	}
 }
 
@@ -87,7 +87,7 @@ function playGame() {
 	}
 }
 
-function doRandom(square) {
+doRandom = (square) => {
 	if (count % 2 !== 0 && possibleMoves.length > 0) {
 		aiMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
 		const move = document.getElementById(aiMove);
@@ -97,7 +97,7 @@ function doRandom(square) {
 	}
 }
 
-function computerO() {
+computerO = () => {
 	possibleMoves = [];
 
 	Array.prototype.forEach.call(col, function (el, i) {
@@ -135,8 +135,7 @@ function computerO() {
 	checkWin(squareO, 'Computer wins', false, true);
 }
 
-function computerX() {
-
+computerX = () => {
 	const oppositeCorner = (10 - squareX[0]).toString();
 	const firstAiMove = possibleMoves.indexOf(squareX[0]);
 	const indexOfOpposite = possibleMoves.indexOf(oppositeCorner);
@@ -174,8 +173,7 @@ function computerX() {
 	checkWin(squareX, 'Computer wins', true, false);
 }
 
-function doAiMove(square) {
-
+doAiMove = (square) => {
 	const conditions = {
 		rows: {
 			a: /(?=.*1)(?=.*2)/,
@@ -289,7 +287,7 @@ function doAiMove(square) {
 	}
 }
 
-function pushSquare(push, check) {
+pushSquare = (push, check) => {
 	doAiMove(check);
 	const move = document.getElementById(aiMove);
 	if (move !== null) {
@@ -298,25 +296,25 @@ function pushSquare(push, check) {
 	}
 }
 
-function play() {
+play = () => {
 	for (let i = 0; i < 9; i++) {
 		col[i].addEventListener('click', playGame);
 	}
 }
 
-function playAgain() {
-	overlay.style.display = 'none';
+playAgain = () => {
+	intro.style.display = 'none';
 	option.style.display = '';
 }
 
-function playAsX() {
+playAsX = () => {
 	count = 0;
 	player = 1;
 	computerLetter = `<i class="fa fa-circle-o"></i>`;
 	reset();
 }
 
-function playAsO() {
+playAsO = () => {
 	count = 1;
 	player = 2;
 	computerLetter = `<i class="fa fa-times"></i>`;
