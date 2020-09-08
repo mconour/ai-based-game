@@ -14,7 +14,7 @@ let oWin = false;
 let squareX = [];
 let squareO = [];
 
-let possibleMoves = [];
+let potentialMoves = [];
 let aiMove = '';
 let computerLetter;
 
@@ -42,7 +42,7 @@ resetGame = () => {
 	oWin = false;
 	squareX = [];
 	squareO = [];
-	possibleMoves = [];
+	potentialMoves = [];
 	aiMove = '';
 	option.style.display = 'none';
 
@@ -88,8 +88,8 @@ function startGame() {
 }
 
 random = (square) => {
-	if (count % 2 !== 0 && possibleMoves.length > 0) {
-		aiMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+	if (count % 2 !== 0 && potentialMoves.length > 0) {
+		aiMove = potentialMoves[Math.floor(Math.random() * potentialMoves.length)];
 		const move = document.getElementById(aiMove);
 		move.innerHTML = computerLetter;
 		square.push(aiMove);
@@ -98,31 +98,31 @@ random = (square) => {
 }
 
 computerO = () => {
-	possibleMoves = [];
+	potentialMoves = [];
 
 	Array.prototype.forEach.call(column, function (el, i) {
 		if (isEmpty(el)) {
-			possibleMoves.push(el.id);
+			potentialMoves.push(el.id);
 		}
 	});
 
-	if (possibleMoves.indexOf('5') > -1) {
-		possibleMoves = ['5'];
+	if (potentialMoves.indexOf('5') > -1) {
+		potentialMoves = ['5'];
 		random(squareO);
-	} else if (possibleMoves.indexOf('5') === -1 && squareX.length === 1) {
-		possibleMoves = ['1', '3', '7', '9'];
+	} else if (potentialMoves.indexOf('5') === -1 && squareX.length === 1) {
+		potentialMoves = ['1', '3', '7', '9'];
 		random(squareO);
 	} else if ((/(?=.*1)(?=.*9)/.test(squareX) || /(?=.*3)(?=.*7)/.test(squareX)) && squareX.length === 2) {
-		possibleMoves = ['2', '4', '6', '8'];
+		potentialMoves = ['2', '4', '6', '8'];
 		random(squareO);
 	} else if (/(1)|(3)|(7)|(9)/.test(squareX) && squareX.indexOf('5') === 0 && squareX.length === 2) {
-		possibleMoves = ['1', '3', '7', '9'];
+		potentialMoves = ['1', '3', '7', '9'];
 
-		const index = possibleMoves.indexOf(squareX[1]);
-		possibleMoves.splice(index, 1);
+		const index = potentialMoves.indexOf(squareX[1]);
+		potentialMoves.splice(index, 1);
 
-		const aiTaken = possibleMoves.indexOf(squareO[0]);
-		possibleMoves.splice(aiTaken, 1);
+		const aiTaken = potentialMoves.indexOf(squareO[0]);
+		potentialMoves.splice(aiTaken, 1);
 
 		pushSquare(squareO, squareX);
 		random(squareO);
@@ -137,32 +137,32 @@ computerO = () => {
 
 computerX = () => {
 	const oppositeCorner = (10 - squareX[0]).toString();
-	const firstAiMove = possibleMoves.indexOf(squareX[0]);
-	const indexOfOpposite = possibleMoves.indexOf(oppositeCorner);
-	possibleMoves = [];
+	const firstAiMove = potentialMoves.indexOf(squareX[0]);
+	const indexOfOpposite = potentialMoves.indexOf(oppositeCorner);
+	potentialMoves = [];
 
 	Array.prototype.forEach.call(column, function (el, i) {
 		if (isEmpty(el)) {
-			possibleMoves.push(el.id);
+			potentialMoves.push(el.id);
 		}
 	});
 
 	if (squareO.length === 0) {
-		possibleMoves = ['1', '3', '7', '9'];
+		potentialMoves = ['1', '3', '7', '9'];
 		random(squareX);
 	} else if (squareO.indexOf('5') === 0 && squareO.length === 1) {
-		possibleMoves = ['1', '3', '7', '9'];
-		possibleMoves = oppositeCorner;
+		potentialMoves = ['1', '3', '7', '9'];
+		potentialMoves = oppositeCorner;
 
 		random(squareX);
 	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 1) {
-		possibleMoves = ['1', '3', '7', '9'];
-		possibleMoves.splice(firstAiMove, 1);
-		possibleMoves.splice(indexOfOpposite, 1);
+		potentialMoves = ['1', '3', '7', '9'];
+		potentialMoves.splice(firstAiMove, 1);
+		potentialMoves.splice(indexOfOpposite, 1);
 
 		random(squareX);
-	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 2 && possibleMoves.indexOf('5') > -1) {
-		possibleMoves = ['5'];
+	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 2 && potentialMoves.indexOf('5') > -1) {
+		potentialMoves = ['5'];
 		random(squareX);
 	} else {
 		pushSquare(squareX, squareX);
@@ -211,76 +211,76 @@ doAiMove = (square) => {
 
 	if (count % 2 !== 0) {
 
-		if (conditions.rows.a.test(squareString) && possibleMoves.indexOf('3') > -1) {
+		if (conditions.rows.a.test(squareString) && potentialMoves.indexOf('3') > -1) {
 			aiMove = '3';
 			count++;
-		} else if (conditions.rows.b.test(squareString) && possibleMoves.indexOf('2') > -1) {
+		} else if (conditions.rows.b.test(squareString) && potentialMoves.indexOf('2') > -1) {
 			aiMove = '2';
 			count++;
-		} else if (conditions.rows.c.test(squareString) && possibleMoves.indexOf('1') > -1) {
+		} else if (conditions.rows.c.test(squareString) && potentialMoves.indexOf('1') > -1) {
 			aiMove = '1';
 			count++;
-		} else if (conditions.rows.d.test(squareString) && possibleMoves.indexOf('6') > -1) {
+		} else if (conditions.rows.d.test(squareString) && potentialMoves.indexOf('6') > -1) {
 			aiMove = '6';
 			count++;
-		} else if (conditions.rows.e.test(squareString) && possibleMoves.indexOf('5') > -1) {
+		} else if (conditions.rows.e.test(squareString) && potentialMoves.indexOf('5') > -1) {
 			aiMove = '5';
 			count++;
-		} else if (conditions.rows.f.test(squareString) && possibleMoves.indexOf('4') > -1) {
+		} else if (conditions.rows.f.test(squareString) && potentialMoves.indexOf('4') > -1) {
 			aiMove = '4';
 			count++;
-		} else if (conditions.rows.g.test(squareString) && possibleMoves.indexOf('9') > -1) {
+		} else if (conditions.rows.g.test(squareString) && potentialMoves.indexOf('9') > -1) {
 			aiMove = '9';
 			count++;
-		} else if (conditions.rows.h.test(squareString) && possibleMoves.indexOf('8') > -1) {
+		} else if (conditions.rows.h.test(squareString) && potentialMoves.indexOf('8') > -1) {
 			aiMove = '8';
 			count++;
-		} else if (conditions.rows.i.test(squareString) && possibleMoves.indexOf('7') > -1) {
+		} else if (conditions.rows.i.test(squareString) && potentialMoves.indexOf('7') > -1) {
 			aiMove = '7';
 			count++;
-		} else if (conditions.columns.a.test(squareString) && possibleMoves.indexOf('7') > -1) {
+		} else if (conditions.columns.a.test(squareString) && potentialMoves.indexOf('7') > -1) {
 			aiMove = '7';
 			count++;
-		} else if (conditions.columns.b.test(squareString) && possibleMoves.indexOf('4') > -1) {
+		} else if (conditions.columns.b.test(squareString) && potentialMoves.indexOf('4') > -1) {
 			aiMove = '4';
 			count++;
-		} else if (conditions.columns.c.test(squareString) && possibleMoves.indexOf('1') > -1) {
+		} else if (conditions.columns.c.test(squareString) && potentialMoves.indexOf('1') > -1) {
 			aiMove = '1';
 			count++;
-		} else if (conditions.columns.d.test(squareString) && possibleMoves.indexOf('8') > -1) {
+		} else if (conditions.columns.d.test(squareString) && potentialMoves.indexOf('8') > -1) {
 			aiMove = '8';
 			count++;
-		} else if (conditions.columns.e.test(squareString) && possibleMoves.indexOf('5') > -1) {
+		} else if (conditions.columns.e.test(squareString) && potentialMoves.indexOf('5') > -1) {
 			aiMove = '5';
 			count++;
-		} else if (conditions.columns.f.test(squareString) && possibleMoves.indexOf('2') > -1) {
+		} else if (conditions.columns.f.test(squareString) && potentialMoves.indexOf('2') > -1) {
 			aiMove = '2';
 			count++;
-		} else if (conditions.columns.g.test(squareString) && possibleMoves.indexOf('9') > -1) {
+		} else if (conditions.columns.g.test(squareString) && potentialMoves.indexOf('9') > -1) {
 			aiMove = '9';
 			count++;
-		} else if (conditions.columns.h.test(squareString) && possibleMoves.indexOf('6') > -1) {
+		} else if (conditions.columns.h.test(squareString) && potentialMoves.indexOf('6') > -1) {
 			aiMove = '6';
 			count++;
-		} else if (conditions.columns.i.test(squareString) && possibleMoves.indexOf('3') > -1) {
+		} else if (conditions.columns.i.test(squareString) && potentialMoves.indexOf('3') > -1) {
 			aiMove = '3';
 			count++;
-		} else if (conditions.diagonals.a.test(squareString) && possibleMoves.indexOf('9') > -1) {
+		} else if (conditions.diagonals.a.test(squareString) && potentialMoves.indexOf('9') > -1) {
 			aiMove = '9';
 			count++;
-		} else if (conditions.diagonals.b.test(squareString) && possibleMoves.indexOf('5') > -1) {
+		} else if (conditions.diagonals.b.test(squareString) && potentialMoves.indexOf('5') > -1) {
 			aiMove = '5';
 			count++;
-		} else if (conditions.diagonals.c.test(squareString) && possibleMoves.indexOf('1') > -1) {
+		} else if (conditions.diagonals.c.test(squareString) && potentialMoves.indexOf('1') > -1) {
 			aiMove = '1';
 			count++;
-		} else if (conditions.diagonals.d.test(squareString) && possibleMoves.indexOf('7') > -1) {
+		} else if (conditions.diagonals.d.test(squareString) && potentialMoves.indexOf('7') > -1) {
 			aiMove = '7';
 			count++;
-		} else if (conditions.diagonals.e.test(squareString) && possibleMoves.indexOf('5') > -1) {
+		} else if (conditions.diagonals.e.test(squareString) && potentialMoves.indexOf('5') > -1) {
 			aiMove = '5';
 			count++;
-		} else if (conditions.diagonals.f.test(squareString) && possibleMoves.indexOf('3') > -1) {
+		} else if (conditions.diagonals.f.test(squareString) && potentialMoves.indexOf('3') > -1) {
 			aiMove = '3';
 			count++;
 		}
