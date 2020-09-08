@@ -77,13 +77,13 @@ function startGame() {
 		squareX.push(this.id);
 		count++;
 		checkWinner(squareX, `You win!`, true, false);
-		if (!xWin) computerO();
+		if (!xWin) compO();
 	} else if (player === 2 && isEmpty(this) && count % 2 === 0) {
 		this.innerHTML = '<i class="fa fa-circle-o"></i>';
 		squareO.push(this.id);
 		count++;
 		checkWinner(squareO, `You win!`, false, true);
-		if (!oWin) computerX();
+		if (!oWin) compX();
 	}
 }
 
@@ -97,7 +97,7 @@ random = (square) => {
 	}
 }
 
-computerO = () => {
+compO = () => {
 	potentialMoves = [];
 
 	Array.prototype.forEach.call(column, function (el, i) {
@@ -135,7 +135,7 @@ computerO = () => {
 	checkWinner(squareO, 'Computer wins', false, true);
 }
 
-computerX = () => {
+compX = () => {
 	const oppositeCorner = (10 - squareX[0]).toString();
 	const firstAiMove = potentialMoves.indexOf(squareX[0]);
 	const indexOfOpposite = potentialMoves.indexOf(oppositeCorner);
@@ -319,7 +319,7 @@ playAsO = () => {
 	player = 2;
 	computerLetter = `<i class="fa fa-times"></i>`;
 	resetGame();
-	computerX();
+	compX();
 }
 
 play();
