@@ -33,11 +33,11 @@ html {
     height: 152px;
     margin: 5px;
     border-radius: 30px;
-    background: rgb(24, 2, 12);
+    background: #857C8D;
 }
 
 .column:hover {
-    background: #4B0625;
+    background: #9992A0;
 }
 
 .fa {
