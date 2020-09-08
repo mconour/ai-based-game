@@ -33,11 +33,11 @@ html {
     height: 152px;
     margin: 5px;
     border-radius: 30px;
-    background: #857C8D;
+    background: rgb(24, 2, 12);
 }
 
 .column:hover {
-    background: #9992A0;
+    background: #4B0625;
 }
 
 .fa {
@@ -45,13 +45,17 @@ html {
 }
 
 .fa-times {
-    color: #18020c;
+    color: #e5ffde;
     font-size: 150px;
 }
 
 .fa-circle-o {
-    color: #18020c;
+    color: #e5ffde;
     font-size: 125px;
+}
+
+i.fa.fa-circle-o {
+    line-height: 185px;
 }
  
 .intro {
@@ -99,9 +103,10 @@ html {
 }
 
 .btn:hover {
-	background: white;
-	color: black;
+	background: #e5ffde;
+	color: rgb(24, 2, 12);
 }
+
 .btn:focus {
 	outline: none;
 }

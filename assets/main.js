@@ -51,7 +51,7 @@ resetGame = () => {
 	}
 }
 
-checkWin = (square, text, x, o) => {
+checkWinner = (square, text, x, o) => {
 	const match = square.join();
 	for (let i = 0; i < 8; i++) {
 		if (winConditions[i].test(match)) {
@@ -61,33 +61,33 @@ checkWin = (square, text, x, o) => {
 			oWin = o;
 		}
 	}
-	checkTie();
+	checkScratch();
 }
 
-checkTie = () => {
+checkScratch = () => {
 	if (count > 8 && !xWin && !oWin) {
-		winnerDisplay.innerHTML = 'Tie';
+		winnerDisplay.innerHTML = `Scratch`;
 		intro.style.display = '';
 	}
 }
 
-function playGame() {
+function startGame() {
 	if (player === 1 && isEmpty(this) && count % 2 === 0) {
 		this.innerHTML = '<i class="fa fa-times"></i>';
 		squareX.push(this.id);
 		count++;
-		checkWin(squareX, 'You win', true, false);
+		checkWinner(squareX, `You win!`, true, false);
 		if (!xWin) computerO();
 	} else if (player === 2 && isEmpty(this) && count % 2 === 0) {
 		this.innerHTML = '<i class="fa fa-circle-o"></i>';
 		squareO.push(this.id);
 		count++;
-		checkWin(squareO, 'You win', false, true);
+		checkWinner(squareO, `You win!`, false, true);
 		if (!oWin) computerX();
 	}
 }
 
-doRandom = (square) => {
+random = (square) => {
 	if (count % 2 !== 0 && possibleMoves.length > 0) {
 		aiMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
 		const move = document.getElementById(aiMove);
@@ -108,13 +108,13 @@ computerO = () => {
 
 	if (possibleMoves.indexOf('5') > -1) {
 		possibleMoves = ['5'];
-		doRandom(squareO);
+		random(squareO);
 	} else if (possibleMoves.indexOf('5') === -1 && squareX.length === 1) {
 		possibleMoves = ['1', '3', '7', '9'];
-		doRandom(squareO);
+		random(squareO);
 	} else if ((/(?=.*1)(?=.*9)/.test(squareX) || /(?=.*3)(?=.*7)/.test(squareX)) && squareX.length === 2) {
 		possibleMoves = ['2', '4', '6', '8'];
-		doRandom(squareO);
+		random(squareO);
 	} else if (/(1)|(3)|(7)|(9)/.test(squareX) && squareX.indexOf('5') === 0 && squareX.length === 2) {
 		possibleMoves = ['1', '3', '7', '9'];
 
@@ -125,14 +125,14 @@ computerO = () => {
 		possibleMoves.splice(aiTaken, 1);
 
 		pushSquare(squareO, squareX);
-		doRandom(squareO);
+		random(squareO);
 	} else {
 		pushSquare(squareO, squareO);
 		pushSquare(squareO, squareX);
-		doRandom(squareO);
+		random(squareO);
 	}
 
-	checkWin(squareO, 'Computer wins', false, true);
+	checkWinner(squareO, 'Computer wins', false, true);
 }
 
 computerX = () => {
@@ -149,28 +149,28 @@ computerX = () => {
 
 	if (squareO.length === 0) {
 		possibleMoves = ['1', '3', '7', '9'];
-		doRandom(squareX);
+		random(squareX);
 	} else if (squareO.indexOf('5') === 0 && squareO.length === 1) {
 		possibleMoves = ['1', '3', '7', '9'];
 		possibleMoves = oppositeCorner;
 
-		doRandom(squareX);
+		random(squareX);
 	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 1) {
 		possibleMoves = ['1', '3', '7', '9'];
 		possibleMoves.splice(firstAiMove, 1);
 		possibleMoves.splice(indexOfOpposite, 1);
 
-		doRandom(squareX);
+		random(squareX);
 	} else if (/(2)|(4)|(6)|(8)/.test(squareO) && squareO.length === 2 && possibleMoves.indexOf('5') > -1) {
 		possibleMoves = ['5'];
-		doRandom(squareX);
+		random(squareX);
 	} else {
 		pushSquare(squareX, squareX);
 		pushSquare(squareX, squareO);
-		doRandom(squareX);
+		random(squareX);
 	}
 
-	checkWin(squareX, 'Computer wins', true, false);
+	checkWinner(squareX, 'Computer wins', true, false);
 }
 
 doAiMove = (square) => {
@@ -298,7 +298,7 @@ pushSquare = (push, check) => {
 
 play = () => {
 	for (let i = 0; i < 9; i++) {
-		column[i].addEventListener('click', playGame);
+		column[i].addEventListener('click', startGame);
 	}
 }
 
