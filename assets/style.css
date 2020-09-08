@@ -17,6 +17,11 @@
     margin-right: 0;
 }
 
+.grid-wrapper {
+    transform: translate(2%, 19%);
+}
+
+
 .col {
     text-align: center;
     float: left;
