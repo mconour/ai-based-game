@@ -1,7 +1,7 @@
-const col = document.querySelectorAll('.col'),
+const column = document.querySelectorAll('.column'),
 	intro = document.getElementById('intro'),
-	winner = document.getElementById('winner'),
-	button = document.getElementById('button'),
+	winnerDisplay = document.getElementById('display-winner'),
+	btn = document.getElementById('btn'),
 	option = document.getElementById('option'),
 	playX = document.getElementById('playX'),
 	playO = document.getElementById('playO');
@@ -37,7 +37,7 @@ isEmpty = (el) => {
 	return !el.hasChildNodes();
 }
 
-reset = () => {
+resetGame = () => {
 	xWin = false;
 	oWin = false;
 	squareX = [];
@@ -47,7 +47,7 @@ reset = () => {
 	option.style.display = 'none';
 
 	for (let i = 0; i < 9; i++) {
-		col[i].innerHTML = '';
+		column[i].innerHTML = '';
 	}
 }
 
@@ -55,7 +55,7 @@ checkWin = (square, text, x, o) => {
 	const match = square.join();
 	for (let i = 0; i < 8; i++) {
 		if (winConditions[i].test(match)) {
-			winner.innerHTML = text;
+			winnerDisplay.innerHTML = text;
 			intro.style.display = '';
 			xWin = x;
 			oWin = o;
@@ -66,7 +66,7 @@ checkWin = (square, text, x, o) => {
 
 checkTie = () => {
 	if (count > 8 && !xWin && !oWin) {
-		winner.innerHTML = 'Tie';
+		winnerDisplay.innerHTML = 'Tie';
 		intro.style.display = '';
 	}
 }
@@ -76,13 +76,13 @@ function playGame() {
 		this.innerHTML = '<i class="fa fa-times"></i>';
 		squareX.push(this.id);
 		count++;
-		checkWin(squareX, 'Player wins', true, false);
+		checkWin(squareX, 'You win', true, false);
 		if (!xWin) computerO();
 	} else if (player === 2 && isEmpty(this) && count % 2 === 0) {
 		this.innerHTML = '<i class="fa fa-circle-o"></i>';
 		squareO.push(this.id);
 		count++;
-		checkWin(squareO, 'Player wins', false, true);
+		checkWin(squareO, 'You win', false, true);
 		if (!oWin) computerX();
 	}
 }
@@ -100,7 +100,7 @@ doRandom = (square) => {
 computerO = () => {
 	possibleMoves = [];
 
-	Array.prototype.forEach.call(col, function (el, i) {
+	Array.prototype.forEach.call(column, function (el, i) {
 		if (isEmpty(el)) {
 			possibleMoves.push(el.id);
 		}
@@ -141,7 +141,7 @@ computerX = () => {
 	const indexOfOpposite = possibleMoves.indexOf(oppositeCorner);
 	possibleMoves = [];
 
-	Array.prototype.forEach.call(col, function (el, i) {
+	Array.prototype.forEach.call(column, function (el, i) {
 		if (isEmpty(el)) {
 			possibleMoves.push(el.id);
 		}
@@ -298,7 +298,7 @@ pushSquare = (push, check) => {
 
 play = () => {
 	for (let i = 0; i < 9; i++) {
-		col[i].addEventListener('click', playGame);
+		column[i].addEventListener('click', playGame);
 	}
 }
 
@@ -311,18 +311,18 @@ playAsX = () => {
 	count = 0;
 	player = 1;
 	computerLetter = `<i class="fa fa-circle-o"></i>`;
-	reset();
+	resetGame();
 }
 
 playAsO = () => {
 	count = 1;
 	player = 2;
 	computerLetter = `<i class="fa fa-times"></i>`;
-	reset();
+	resetGame();
 	computerX();
 }
 
 play();
-button.addEventListener('click', playAgain);
+btn.addEventListener('click', playAgain);
 playX.addEventListener('click', playAsX);
 playO.addEventListener('click', playAsO);

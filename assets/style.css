@@ -1,3 +1,7 @@
+html {
+    font-family: Futura,Trebuchet MS,Arial,sans-serif; 
+}
+
 .wrapper {
     margin: 0 auto;
     width: 500px;
@@ -9,11 +13,11 @@
     clear: both;
 }
 
-.grid>.col:first-child {
+.grid>.column:first-child {
     margin-left: 0;
 }
 
-.grid>.col:last-child {
+.grid>.column:last-child {
     margin-right: 0;
 }
 
@@ -22,7 +26,7 @@
 }
 
 
-.col {
+.column {
     text-align: center;
     float: left;
     width: 30.65%;
@@ -32,7 +36,7 @@
     background: #857C8D;
 }
 
-.col:hover {
+.column:hover {
     background: #9992A0;
 }
 
@@ -65,22 +69,26 @@
     background: rgba(24, 2, 12, 0.9);
 }
 
-.winner, 
-.button {
+.display-winner, 
+.btn {
     margin: 0 auto;
     position: relative;
-    font-family: Futura,Trebuchet MS,Arial,sans-serif; 
     font-weight: 700;
     color: #e5ffde;
+    text-transform: uppercase;
 }
 
-.winner {
+.title {
+    text-align: center;
+}
+
+.display-winner {
 	top: 40%;
 	left: 0;
 	right: 0;
 }
 
-.button {
+.btn {
     width: 115px;
     top: 45%;
     padding: 0.75em;
@@ -90,11 +98,11 @@
     cursor: default;
 }
 
-.button:hover {
+.btn:hover {
 	background: white;
 	color: black;
 }
-.button:focus {
+.btn:focus {
 	outline: none;
 }
 
@@ -107,7 +115,7 @@
 	.wrapper {
 		width: 600px;
 	}
-	.col {
+	.column {
 		width: 31.1%;
 		height: 186px;
 	}
