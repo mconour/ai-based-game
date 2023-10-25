@@ -40,6 +40,3 @@ To play this game, follow these steps:
 - HTML
 - CSS
 - JavaScript
-
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
